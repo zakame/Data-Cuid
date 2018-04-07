@@ -56,6 +56,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/zakame/Data-cuid/issues"
+      },
+      "homepage" : "https://github.com/zakame/Data-cuid",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/zakame/Data-cuid.git",
+         "web" : "https://github.com/zakame/Data-cuid"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:ZAKAME",
    "x_contributors" : [
