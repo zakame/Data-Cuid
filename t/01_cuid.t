@@ -7,6 +7,12 @@ use Test::More tests => 4;
 use Data::Cuid;
 use Math::Base36 'decode_base36';
 
+sub _count_ok {
+    local $_ = shift;
+    my ( $cnt, $desc ) = @_;
+    cmp_ok tr/0-9a-zA-Z//, '>=', $cnt, $desc;
+}
+
 subtest 'basics' => sub {
     plan tests => 6;
 
@@ -16,20 +22,14 @@ subtest 'basics' => sub {
     ok $id, 'cuid returns a value';
     note $id;
 
-    {
-        local $_ = $id;
-        is /^c/, 1, 'cuid starts with "c"';
-        cmp_ok tr/0-9a-zA-Z//, '>=', 24, 'cuid is at least 24 characters';
-    }
+    is $id =~ /^c/, 1, 'cuid starts with "c"';
+    _count_ok $id, 24, 'cuid is at least 24 characters';
 
     my $slug = Data::Cuid::slug;
     ok $slug, 'slug returns a value';
     note $slug;
 
-    {
-        local $_ = $slug;
-        cmp_ok tr/0-9a-zA-Z//, '>=', 7, 'slug is at least 7 characters';
-    }
+    _count_ok $slug, 7, 'slug is at least 7 characters';
 };
 
 subtest 'package variables' => sub {
