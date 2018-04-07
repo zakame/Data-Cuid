@@ -1,25 +1,25 @@
-[![Build Status](https://travis-ci.org/zakame/Data-cuid.svg?branch=master)](https://travis-ci.org/zakame/Data-cuid) [![Coverage Status](https://img.shields.io/coveralls/zakame/Data-cuid/master.svg?style=flat)](https://coveralls.io/r/zakame/Data-cuid?branch=master) [![MetaCPAN Release](https://badge.fury.io/pl/Data-cuid.svg)](https://metacpan.org/release/Data-cuid) [![Build Status](https://img.shields.io/appveyor/ci/zakame/Data-cuid/master.svg?logo=appveyor)](https://ci.appveyor.com/project/zakame/Data-cuid/branch/master)
+[![Build Status](https://travis-ci.org/zakame/Data-Cuid.svg?branch=master)](https://travis-ci.org/zakame/Data-Cuid) [![Coverage Status](https://img.shields.io/coveralls/zakame/Data-Cuid/master.svg?style=flat)](https://coveralls.io/r/zakame/Data-Cuid?branch=master) [![MetaCPAN Release](https://badge.fury.io/pl/Data-Cuid.svg)](https://metacpan.org/release/Data-Cuid) [![Build Status](https://img.shields.io/appveyor/ci/zakame/Data-Cuid/master.svg?logo=appveyor)](https://ci.appveyor.com/project/zakame/Data-Cuid/branch/master)
 # NAME
 
-Data::cuid - collision-resistant IDs
+Data::Cuid - collision-resistant IDs
 
 # SYNOPSIS
 
-    use Data::cuid qw(cuid slug);
+    use Data::Cuid qw(cuid slug);
 
     my $id   = cuid();          # cjfo7v1dz0001gsd19ldqqke33f
     my $slug = slug();          # jfo8l3mm2pl17
 
 # DESCRIPTION
 
-`Data::cuid` is a port of the cuid JavaScript library for Perl.
+`Data::Cuid` is a port of the cuid JavaScript library for Perl.
 
 Collision-resistant IDs (also known as _cuids_) are optimized for
 horizontal scaling and binary search lookup performance, especially for
 web or mobile applications with a need to generate tens or hundreds of
 new entities per second across multiple hosts.
 
-`Data::cuid` does not export any functions by default.
+`Data::Cuid` does not export any functions by default.
 
 # FUNCTIONS
 

@@ -1,4 +1,4 @@
-package Data::cuid;
+package Data::Cuid;
 
 use strict;
 use warnings;
@@ -76,25 +76,25 @@ __END__
 
 =head1 NAME
 
-Data::cuid - collision-resistant IDs
+Data::Cuid - collision-resistant IDs
 
 =head1 SYNOPSIS
 
-    use Data::cuid qw(cuid slug);
+    use Data::Cuid qw(cuid slug);
 
     my $id   = cuid();          # cjfo7v1dz0001gsd19ldqqke33f
     my $slug = slug();          # jfo8l3mm2pl17
 
 =head1 DESCRIPTION
 
-C<Data::cuid> is a port of the cuid JavaScript library for Perl.
+C<Data::Cuid> is a port of the cuid JavaScript library for Perl.
 
 Collision-resistant IDs (also known as I<cuids>) are optimized for
 horizontal scaling and binary search lookup performance, especially for
 web or mobile applications with a need to generate tens or hundreds of
 new entities per second across multiple hosts.
 
-C<Data::cuid> does not export any functions by default.
+C<Data::Cuid> does not export any functions by default.
 
 =head1 FUNCTIONS
 

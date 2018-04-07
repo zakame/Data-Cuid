@@ -4,15 +4,15 @@ use warnings;
 use utf8;
 
 use Test::More tests => 4;
-use Data::cuid;
+use Data::Cuid;
 use Math::Base36 'decode_base36';
 
 subtest 'basics' => sub {
     plan tests => 6;
 
-    can_ok 'Data::cuid' => qw(cuid slug);
+    can_ok 'Data::Cuid' => qw(cuid slug);
 
-    my $id = Data::cuid::cuid;
+    my $id = Data::Cuid::cuid;
     ok $id, 'cuid returns a value';
     note $id;
 
@@ -22,7 +22,7 @@ subtest 'basics' => sub {
         cmp_ok tr/0-9a-zA-Z//, '>=', 24, 'cuid is at least 24 characters';
     }
 
-    my $slug = Data::cuid::slug;
+    my $slug = Data::Cuid::slug;
     ok $slug, 'slug returns a value';
     note $slug;
 
@@ -35,29 +35,29 @@ subtest 'basics' => sub {
 subtest 'package variables' => sub {
     plan tests => 3;
 
-    is $Data::cuid::size, 4,  'default block size';
-    is $Data::cuid::base, 36, 'default base';
-    is $Data::cuid::cmax, 36**4,
+    is $Data::Cuid::size, 4,  'default block size';
+    is $Data::Cuid::base, 36, 'default base';
+    is $Data::Cuid::cmax, 36**4,
         'default maximum discrete values for safe counter';
 };
 
 subtest 'private functions' => sub {
     plan tests => 5;
 
-    my $fp = Data::cuid::_fingerprint;
+    my $fp = Data::Cuid::_fingerprint;
     ok decode_base36 $fp, 'fingerprint is base36-encoded';
 
-    my $rb = Data::cuid::_random_block;
+    my $rb = Data::Cuid::_random_block;
     ok decode_base36 $rb, 'random block is base36-encoded';
 
-    my $ts = Data::cuid::_timestamp;
+    my $ts = Data::Cuid::_timestamp;
     ok decode_base36 $ts, 'timestamp is base36-encoded';
 
-    my $c = Data::cuid::_safe_counter;
+    my $c = Data::Cuid::_safe_counter;
     ok $c, "counter starts at $c";
 
-    Data::cuid::_safe_counter while ++$c < $Data::cuid::cmax;
-    is Data::cuid::_safe_counter, 0, 'safe counter rolls back to 0';
+    Data::Cuid::_safe_counter while ++$c < $Data::Cuid::cmax;
+    is Data::Cuid::_safe_counter, 0, 'safe counter rolls back to 0';
 };
 
 subtest 'collisions' => sub {
@@ -67,7 +67,7 @@ subtest 'collisions' => sub {
     my $max = 10_000;
     plan tests => $max * 2;
 
-    my $collisionTest = sub {
+    my $test = sub {
         my $fn = shift;
         my %ids;
 
@@ -81,6 +81,6 @@ subtest 'collisions' => sub {
         }
     };
 
-    $collisionTest->( \&Data::cuid::cuid );
-    $collisionTest->( \&Data::cuid::slug );
+    $test->( \&Data::Cuid::cuid );
+    $test->( \&Data::Cuid::slug );
 };
