@@ -11,9 +11,9 @@ BEGIN {
 }
 
 use List::Util 'reduce';
-use Math::Base36 ':all';
+use Math::Base36 'encode_base36';
 use Sys::Hostname 'hostname';
-use Time::HiRes;
+use Time::HiRes ();
 
 our $size = 4;
 our $base = 36;
