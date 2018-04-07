@@ -1,0 +1,3 @@
+[NamingConventions::Capitalization]
+local_lexical_variables = :starts_with_lower
+packages = :starts_with_lower
