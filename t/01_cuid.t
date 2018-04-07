@@ -71,13 +71,11 @@ subtest 'collisions' => sub {
         my $fn = shift;
         my %ids;
 
-        my $i = 0;
-        while ( $i < $max ) {
+        for ( my $i = 0; $i < $max; $i++ ) {
             my $id = $fn->();
 
             ok !$ids{$id}, "$id is unique in $i iterations";
             ++$ids{$id};
-            ++$i;
         }
     };
 
