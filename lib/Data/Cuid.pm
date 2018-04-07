@@ -30,6 +30,8 @@ our $VERSION = "0.01";
     }
 }
 
+# taken from the NodeJS version of fingerprint
+# https://github.com/ericelliott/cuid/blob/master/lib/fingerprint.js
 sub _fingerprint {
     my $padding = 2;
     my $pid = encode_base36 $$, $padding;
