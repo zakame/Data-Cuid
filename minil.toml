@@ -1,4 +1,4 @@
-name = "Data-cuid"
+name = "Data-Cuid"
 badges = ["travis", "coveralls", "metacpan", "appveyor"]
 authority="cpan:ZAKAME"
 

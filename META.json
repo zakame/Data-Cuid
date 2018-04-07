@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : 2
    },
-   "name" : "Data-cuid",
+   "name" : "Data-Cuid",
    "no_index" : {
       "directory" : [
          "t",
@@ -58,13 +58,13 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/zakame/Data-cuid/issues"
+         "web" : "https://github.com/zakame/Data-Cuid/issues"
       },
-      "homepage" : "https://github.com/zakame/Data-cuid",
+      "homepage" : "https://github.com/zakame/Data-Cuid",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/zakame/Data-cuid.git",
-         "web" : "https://github.com/zakame/Data-cuid"
+         "url" : "git://github.com/zakame/Data-Cuid.git",
+         "web" : "https://github.com/zakame/Data-Cuid"
       }
    },
    "version" : "0.01",
