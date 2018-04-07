@@ -47,26 +47,18 @@ sub _random_block { encode_base36 rand() * $cmax << 0, $size }
 sub _timestamp { encode_base36 sprintf '%.0f' => Time::HiRes::time * 1000 }
 
 sub cuid {
-    my $str = 'c';
-
-    my $counter = encode_base36 _safe_counter, $size;
-
-    my $fingerprint = _fingerprint;
-
-    my $random = join '' => _random_block, _random_block;
-
-    lc join '' => $str, _timestamp, $counter, $fingerprint, $random;
+    lc join '' => 'c',
+        _timestamp,
+        encode_base36( _safe_counter, $size ),
+        _fingerprint,
+        _random_block, _random_block;
 }
 
 sub slug {
-    my $counter = substr encode_base36(_safe_counter), -4;
-
-    my $fingerprint = join '' => substr( _fingerprint, 0, 1 ),
-        substr( _fingerprint, -1 );
-
-    my $random = substr _random_block, -2;
-
-    lc join '' => _timestamp, $counter, $fingerprint, $random;
+    lc join '' => substr( _timestamp, -2 ),
+        substr( encode_base36(_safe_counter), -4 ),
+        substr( _fingerprint, 0, 1 ), substr( _fingerprint, -1 ),
+        substr( _random_block, -2 );
 }
 
 1;
@@ -84,8 +76,8 @@ Data::Cuid - collision-resistant IDs
 
     use Data::Cuid qw(cuid slug);
 
-    my $id   = cuid();          # cjfo7v1dz0001gsd19ldqqke33f
-    my $slug = slug();          # jfo8l3mm2pl17
+    my $id   = cuid();          # cjfphfcxm0000e5i19lls09lovq
+    my $slug = slug();          # y81elxl
 
 =head1 DESCRIPTION
 
