@@ -12,10 +12,14 @@ Data::cuid - collision-resistant IDs
 
 # DESCRIPTION
 
-Data::cuid is a port of cuid JavaScript library for Perl.
+`Data::cuid` is a port of the cuid JavaScript library for Perl.
 
 Collision-resistant IDs (also known as _cuids_) are optimized for
-horizontal scaling and binary search lookup performance.
+horizontal scaling and binary search lookup performance, especially for
+web or mobile applications with a need to generate tens or hundreds of
+new entities per second across multiple hosts.
+
+`Data::cuid` does not export any functions by default.
 
 # FUNCTIONS
 
@@ -24,13 +28,17 @@ horizontal scaling and binary search lookup performance.
     my $cuid = cuid();
 
 Produce a cuid as described in [the original JavaScript
-implementation](https://github.com/ericelliott/cuid#broken-down).
+implementation](https://github.com/ericelliott/cuid#broken-down).  This
+cuid is safe to use as HTML element IDs, and unique server-side record
+lookups.
 
 ## slug
 
     my $slug = slug();
 
-Produce a shorter ID in nearly the same fashion as ["cuid"](#cuid).
+Produce a shorter ID in nearly the same fashion as ["cuid"](#cuid).  This slug
+is good for things like URL slug disambiguation (i.e., `example.com/some-post-title-<slug>`) but is absolutely not recommended
+for database unique IDs.
 
 # SEE ALSO
 
