@@ -35,10 +35,10 @@ subtest 'basics' => sub {
 subtest 'package variables' => sub {
     plan tests => 3;
 
-    is $Data::cuid::blockSize, 4,  'default block size';
-    is $Data::cuid::base,      36, 'default base';
-    is $Data::cuid::discreteValues, 36**4,
-        'default discrete values for safe counter';
+    is $Data::cuid::size, 4,  'default block size';
+    is $Data::cuid::base, 36, 'default base';
+    is $Data::cuid::cmax, 36**4,
+        'default maximum discrete values for safe counter';
 };
 
 subtest 'private functions' => sub {
@@ -56,7 +56,7 @@ subtest 'private functions' => sub {
     my $c = Data::cuid::_safe_counter;
     ok $c, "counter starts at $c";
 
-    Data::cuid::_safe_counter while ++$c < $Data::cuid::discreteValues;
+    Data::cuid::_safe_counter while ++$c < $Data::cuid::cmax;
     is Data::cuid::_safe_counter, 0, 'safe counter rolls back to 0';
 };
 

@@ -15,9 +15,9 @@ use Math::Base36 ':all';
 use Sys::Hostname 'hostname';
 use Time::HiRes;
 
-our $blockSize      = 4;
-our $base           = 36;
-our $discreteValues = $base**$blockSize;
+our $size = 4;
+our $base = 36;
+our $cmax = $base**$size;
 
 our $VERSION = "0.01";
 
@@ -25,7 +25,7 @@ our $VERSION = "0.01";
     my $c = 0;
 
     sub _safe_counter {
-        $c = $c < $discreteValues ? $c : 0;
+        $c = $c < $cmax ? $c : 0;
         $c++;
     }
 }
@@ -35,19 +35,19 @@ sub _fingerprint {
     my $pid = encode_base36 $$, $padding;
 
     my $hostname = hostname;
-    my $hostId = reduce { $a + ord($b) } length($hostname) + $base,
+    my $id = reduce { $a + ord($b) } length($hostname) + $base,
         split // => $hostname;
 
-    join '' => $pid, encode_base36 $hostId, $padding;
+    join '' => $pid, encode_base36 $id, $padding;
 }
 
-sub _random_block { encode_base36 rand() * $discreteValues << 0, $blockSize }
+sub _random_block { encode_base36 rand() * $cmax << 0, $size }
 sub _timestamp { encode_base36 sprintf '%.0f' => Time::HiRes::time * 1000 }
 
 sub cuid {
     my $str = 'c';
 
-    my $counter = encode_base36 _safe_counter, $blockSize;
+    my $counter = encode_base36 _safe_counter, $size;
 
     my $fingerprint = _fingerprint;
 
