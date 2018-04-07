@@ -67,7 +67,7 @@
          "web" : "https://github.com/zakame/Data-Cuid"
       }
    },
-   "version" : "0.01",
+   "version" : "0.02",
    "x_authority" : "cpan:ZAKAME",
    "x_contributors" : [
       "Zak B. Elep <zakame@zakame.net>"
