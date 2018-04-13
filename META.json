@@ -44,7 +44,6 @@
          "requires" : {
             "Exporter" : "5.57",
             "List::Util" : "0",
-            "Math::Base36" : "0",
             "Time::HiRes" : "0",
             "perl" : "5.008001"
          }
