@@ -11,7 +11,6 @@ BEGIN {
 }
 
 use List::Util 'reduce';
-use Math::Base36 'encode_base36';
 use Sys::Hostname 'hostname';
 use Time::HiRes ();
 
@@ -30,33 +29,48 @@ our $VERSION = "0.02";
     }
 }
 
+# from Math::Base36, but without using Math::BigInt (since only
+# timestamp is the largest int used here )
+sub _encode_base36 {
+    my ( $n, $padding ) = ( @_, 1 );
+
+    my $res = '';
+    while ($n) {
+        my $remainder = $n % 36;
+        $res .= $remainder <= 9 ? $remainder : chr( 55 + $remainder );
+        $n = int $n / 36;
+    }
+
+    sprintf '%0*s' => $padding, scalar reverse $res;
+}
+
 # taken from the NodeJS version of fingerprint
 # https://github.com/ericelliott/cuid/blob/master/lib/fingerprint.js
 sub _fingerprint {
     my $padding = 2;
-    my $pid = encode_base36 $$, $padding;
+    my $pid = _encode_base36 $$, $padding;
 
     my $hostname = hostname;
     my $id = reduce { $a + ord($b) } length($hostname) + $base,
         split // => $hostname;
 
-    join '' => $pid, encode_base36 $id, $padding;
+    join '' => $pid, _encode_base36 $id, $padding;
 }
 
-sub _random_block { encode_base36 rand() * $cmax << 0, $size }
-sub _timestamp { encode_base36 sprintf '%.0f' => Time::HiRes::time * 1000 }
+sub _random_block { _encode_base36 $cmax * rand() << 0, $size }
+sub _timestamp { _encode_base36 sprintf '%.0f' => Time::HiRes::time * 1000 }
 
 sub cuid {
     lc join '' => 'c',
         _timestamp,
-        encode_base36( _safe_counter, $size ),
+        _encode_base36( _safe_counter, $size ),
         _fingerprint,
         _random_block, _random_block;
 }
 
 sub slug {
     lc join '' => substr( _timestamp, -2 ),
-        substr( encode_base36(_safe_counter), -4 ),
+        substr( _encode_base36(_safe_counter), -4 ),
         substr( _fingerprint, 0, 1 ), substr( _fingerprint, -1 ),
         substr( _random_block, -2 );
 }

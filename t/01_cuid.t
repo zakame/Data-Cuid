@@ -5,7 +5,6 @@ use utf8;
 
 use Test::More tests => 4;
 use Data::Cuid;
-use Math::Base36 'decode_base36';
 
 sub _count_ok {
     local $_ = shift;
@@ -44,14 +43,11 @@ subtest 'package variables' => sub {
 subtest 'private functions' => sub {
     plan tests => 5;
 
-    my $fp = Data::Cuid::_fingerprint;
-    ok decode_base36 $fp, 'fingerprint is base36-encoded';
+    ok Data::Cuid::_fingerprint, 'got fingerprint';
 
-    my $rb = Data::Cuid::_random_block;
-    ok decode_base36 $rb, 'random block is base36-encoded';
+    ok Data::Cuid::_random_block, 'got random block';
 
-    my $ts = Data::Cuid::_timestamp;
-    ok decode_base36 $ts, 'timestamp is base36-encoded';
+    ok Data::Cuid::_timestamp, 'got timestamp';
 
     my $c = Data::Cuid::_safe_counter;
     ok $c, "counter starts at $c";
