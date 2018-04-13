@@ -2,6 +2,11 @@ Revision history for Perl extension Data-cuid
 
 {{$NEXT}}
 
+0.03 2018-04-13T04:08:17Z
+
+    - Remove Math::Base36 dependency; include its decode function
+      instead
+
 0.02 2018-04-07T15:01:26Z
 
     - Simplify parts of test and module
