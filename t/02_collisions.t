@@ -27,4 +27,9 @@ my $test = sub {
 };
 
 $test->( \&Data::Cuid::cuid );
-$test->( \&Data::Cuid::slug );
+
+TODO: {
+    local $TODO = 'slug() can easily get collisions due to less precision';
+
+    $test->( \&Data::Cuid::slug );
+}
