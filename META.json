@@ -50,6 +50,7 @@
       },
       "test" : {
          "requires" : {
+            "Sub::Util" : "0",
             "Test::More" : "0.98"
          }
       }
