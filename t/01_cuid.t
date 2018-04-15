@@ -41,7 +41,21 @@ subtest 'package variables' => sub {
 };
 
 subtest 'private functions' => sub {
-    plan tests => 6;
+    plan tests => 7;
+
+    subtest 'local encode_base36' => sub {
+        plan tests => 3;
+
+        my $n = 1234;
+
+        note explain '$n = ', $n;
+        is Data::Cuid::_encode_base36(1234), 'A',
+            '_encode_base36 of $n is truncated';
+        is Data::Cuid::_encode_base36( 1234, 2 ), 'YA',
+            '_encode_base36 of $n with given size';
+        is Data::Cuid::_encode_base36( 1234, 4 ), '00YA',
+            '_encode_base36 of $n with extra padding';
+    };
 
     ok Data::Cuid::_fingerprint, 'got fingerprint';
     subtest 'fingerprint size' => sub {
