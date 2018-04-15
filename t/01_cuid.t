@@ -41,13 +41,27 @@ subtest 'package variables' => sub {
 };
 
 subtest 'private functions' => sub {
-    plan tests => 5;
+    plan tests => 6;
 
     ok Data::Cuid::_fingerprint, 'got fingerprint';
+    subtest 'fingerprint size' => sub {
+        plan tests => 2;
+
+        my $fp = Data::Cuid::_fingerprint;
+        note explain $fp;
+        is length $fp, 4, 'fingerprint is at max size';
+
+        local $$ = 36**2 - 1;
+        my $fp_mockpid = Data::Cuid::_fingerprint;
+        note explain $fp_mockpid;
+        is $fp_mockpid, 'ZZ9L', 'fingerprint overflow but still at max size';
+    };
 
     ok Data::Cuid::_random_block, 'got random block';
+    note explain Data::Cuid::_random_block;
 
     ok Data::Cuid::_timestamp, 'got timestamp';
+    note explain Data::Cuid::_timestamp;
 
     my $c = Data::Cuid::_safe_counter;
     ok $c, "counter starts at $c";
