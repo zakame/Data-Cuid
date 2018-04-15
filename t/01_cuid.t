@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use utf8;
 
-use Test::More tests => 4;
+use Test::More tests => 3;
 use Data::Cuid;
 
 sub _count_ok {
@@ -54,27 +54,4 @@ subtest 'private functions' => sub {
 
     Data::Cuid::_safe_counter while ++$c < $Data::Cuid::cmax;
     is Data::Cuid::_safe_counter, 0, 'safe counter rolls back to 0';
-};
-
-subtest 'collisions' => sub {
-    plan skip_all => 'Testing collisions only upon release'
-        unless $ENV{RELEASE_TESTING};
-
-    my $max = 10_000;
-    plan tests => $max * 2;
-
-    my $test = sub {
-        my $fn = shift;
-        my %ids;
-
-        for ( my $i = 0; $i < $max; $i++ ) {
-            my $id = $fn->();
-
-            ok !$ids{$id}, "$id is unique in $i iterations";
-            ++$ids{$id};
-        }
-    };
-
-    $test->( \&Data::Cuid::cuid );
-    $test->( \&Data::Cuid::slug );
 };
