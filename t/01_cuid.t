@@ -54,7 +54,8 @@ subtest 'private functions' => sub {
         local $$ = 36**2 - 1;
         my $fp_mockpid = Data::Cuid::_fingerprint;
         note explain $fp_mockpid;
-        is $fp_mockpid, 'ZZ9L', 'fingerprint overflow but still at max size';
+        is length $fp_mockpid, 4,
+            'fingerprint overflow but still at max size';
     };
 
     ok Data::Cuid::_random_block, 'got random block';
