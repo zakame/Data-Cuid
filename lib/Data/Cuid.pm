@@ -16,7 +16,7 @@ use Time::HiRes ();
 
 our $size = 4;
 our $base = 36;
-our $cmax = $base**$size;
+our $cmax = ($base)**($size);
 
 our $VERSION = "0.03";
 
