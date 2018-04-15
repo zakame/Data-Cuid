@@ -32,7 +32,7 @@ our $VERSION = "0.03";
 # from Math::Base36, but without using Math::BigInt (since only
 # timestamp is the largest int used here )
 sub _encode_base36 {
-    my ( $n, $padding ) = ( @_, 1 );
+    my ( $n, $size ) = ( @_, 1 );
 
     my $res = '';
     while ($n) {
@@ -41,7 +41,10 @@ sub _encode_base36 {
         $n = int $n / 36;
     }
 
-    sprintf '%0*s' => $padding, scalar reverse $res;
+    # also return this as a string of exactly $size characters; note
+    # that this means numbers above 36**$size - 1 will be truncated to
+    # $size and be incorrect, unless $size is increased
+    substr sprintf( '%0*s' => $size, scalar reverse $res ), 0 - $size;
 }
 
 # taken from the NodeJS version of fingerprint
