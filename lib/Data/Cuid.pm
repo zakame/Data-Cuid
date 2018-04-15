@@ -61,7 +61,10 @@ sub _fingerprint {
 }
 
 sub _random_block { _encode_base36 $cmax * rand() << 0, $size }
-sub _timestamp { _encode_base36 sprintf '%.0f' => Time::HiRes::time * 1000 }
+
+sub _timestamp {
+    _encode_base36 sprintf( '%.0f' => Time::HiRes::time * 1000 ), 8;
+}
 
 sub cuid {
     lc join '' => 'c',
