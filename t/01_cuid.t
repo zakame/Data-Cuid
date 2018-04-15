@@ -22,7 +22,7 @@ subtest 'basics' => sub {
     note $id;
 
     is $id =~ /^c/, 1, 'cuid starts with "c"';
-    _count_ok $id, 24, 'cuid is at least 24 characters';
+    _count_ok $id, 25, 'cuid is at least 25 characters';
 
     my $slug = Data::Cuid::slug;
     ok $slug, 'slug returns a value';
