@@ -96,8 +96,8 @@ Data::Cuid - collision-resistant IDs
 
     use Data::Cuid qw(cuid slug);
 
-    my $id   = cuid();          # cjfphfcxm0000e5i19lls09lovq
-    my $slug = slug();          # y81elxl
+    my $id   = cuid();          # cjg0i57uu0000ng9lwvds8vb3
+    my $slug = slug();          # uv1nlmi
 
 =head1 DESCRIPTION
 
