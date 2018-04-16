@@ -43,7 +43,7 @@ sub _encode_base36 {
 
     # also return this as a string of exactly $max characters; note
     # that this means numbers above 36**$max - 1 will be truncated to
-    # $max and be incorrect, unless $max is increased
+    # $max size and be incorrect, unless $max is increased
     substr sprintf( '%0*s' => $max, scalar reverse $res ), 0 - $max;
 }
 
