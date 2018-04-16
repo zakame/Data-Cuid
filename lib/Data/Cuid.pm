@@ -34,17 +34,18 @@ our $VERSION = "0.03";
 sub _encode_base36 {
     my ( $n, $max ) = ( @_, 1 );
 
-    my $res = '';
+    my @res;
     while ($n) {
         my $remainder = $n % 36;
-        $res .= $remainder <= 9 ? $remainder : chr( 55 + $remainder );
+        unshift @res, $remainder <= 9 ? $remainder : chr( 55 + $remainder );
         $n = int $n / 36;
     }
 
     # also return this as a string of exactly $max characters; note
     # that this means numbers above 36**$max - 1 will be truncated to
     # $max size and be incorrect, unless $max is increased
-    substr sprintf( '%0*s' => $max, scalar reverse $res ), 0 - $max;
+    unshift @res, '0' while @res < $max;
+    join '' => @res[ @res - $max .. $#res ];
 }
 
 # taken from the NodeJS version of fingerprint
