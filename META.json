@@ -33,6 +33,7 @@
       },
       "develop" : {
          "requires" : {
+            "IO::Async" : "0.38",
             "Sub::Util" : "0",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion::Fast" : "0.04",
