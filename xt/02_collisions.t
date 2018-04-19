@@ -4,7 +4,6 @@ use warnings;
 
 use Test::More;
 
-
 BEGIN {
     plan skip_all => 'Testing collisions only upon release'
         unless $ENV{RELEASE_TESTING};
